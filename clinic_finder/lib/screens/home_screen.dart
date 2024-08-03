@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models/clinic.dart';
+import '../models/clinic.dart';
 import 'clinic_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {

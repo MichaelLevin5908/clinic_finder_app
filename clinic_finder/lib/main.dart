@@ -1,8 +1,9 @@
 import 'package:amplify_flutter/amplify.dart';
-import 'package:clinic_finder_app/sign_in.dart';
+import 'package:clinic_finder_app/screens/sign_in.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'amplifyconfiguration.dart'; 
 
 
 void main() async {

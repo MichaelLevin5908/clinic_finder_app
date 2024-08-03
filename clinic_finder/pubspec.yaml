@@ -19,6 +19,9 @@ dependencies:
   google_maps_flutter: ^2.0.6
   provider: ^6.0.0          # State management
   http: ^0.13.3             # HTTP requests
+  amplify_flutter: ^0.2.0
+  amplify_auth_cognito: ^0.2.0
+  amplify_storage_s3: ^0.2.0
 
 dev_dependencies:
   flutter_test:

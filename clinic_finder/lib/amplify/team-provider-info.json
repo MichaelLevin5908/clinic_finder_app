@@ -1,0 +1,24 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-clinicfinder-dev-e5eb3-authRole",
+      "UnauthRoleArn": "arn:aws:iam::663802264300:role/amplify-clinicfinder-dev-e5eb3-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::663802264300:role/amplify-clinicfinder-dev-e5eb3-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-clinicfinder-dev-e5eb3-deployment",
+      "UnauthRoleName": "amplify-clinicfinder-dev-e5eb3-unauthRole",
+      "StackName": "amplify-clinicfinder-dev-e5eb3",
+      "StackId": "arn:aws:cloudformation:us-west-1:663802264300:stack/amplify-clinicfinder-dev-e5eb3/d7fb3b40-4e49-11ef-b512-0678eb141fff",
+      "AmplifyAppId": "d8xrkc1cpafq5"
+    },
+    "categories": {
+      "auth": {
+        "user": {},
+        "userPoolGroups": {}
+      },
+      "api": {
+        "clinicfinder": {}
+      }
+    }
+  }
+}

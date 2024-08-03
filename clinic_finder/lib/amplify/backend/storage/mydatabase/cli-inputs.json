@@ -1,0 +1,18 @@
+{
+  "resourceName": "mydatabase",
+  "tableName": "users",
+  "partitionKey": {
+    "fieldName": "users",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "n",
+      "partitionKey": {
+        "fieldName": "users",
+        "fieldType": "string"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}

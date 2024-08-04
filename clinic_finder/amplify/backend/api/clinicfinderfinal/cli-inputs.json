@@ -1,7 +1,7 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "clinicfinder",
+    "apiName": "clinicfinderfinal",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",

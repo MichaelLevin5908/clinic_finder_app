@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "clinicfinder",
+  "AppSyncApiName": "clinicfinderfinal",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

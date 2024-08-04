@@ -34,7 +34,7 @@ class _SignInPage1State extends State<SignInPage1> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
-                        "Welcome to Flutter!",
+                        "Welcome to Clinic Finder!",
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),

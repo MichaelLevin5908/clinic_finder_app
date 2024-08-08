@@ -10,6 +10,11 @@
       "StackName": "amplify-clinicfinderfinal-dev-bbe1e",
       "StackId": "arn:aws:cloudformation:us-west-1:663802264300:stack/amplify-clinicfinderfinal-dev-bbe1e/82706c00-5203-11ef-a915-069df91c342f",
       "AmplifyAppId": "d2omd6rkg2snf6"
+    },
+    "categories": {
+      "auth": {
+        "clinicfinderfinal899ff17c": {}
+      }
     }
   }
 }

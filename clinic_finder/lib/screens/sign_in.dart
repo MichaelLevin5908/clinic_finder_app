@@ -1,4 +1,7 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInPage1 extends StatefulWidget {
   const SignInPage1({super.key});
@@ -10,8 +13,52 @@ class SignInPage1 extends StatefulWidget {
 class _SignInPage1State extends State<SignInPage1> {
   bool _isPasswordVisible = false;
   bool _rememberMe = false;
+  bool _isLoading = false;
+  String? _errorMessage;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _signIn() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      SignInResult result = await Amplify.Auth.signIn(
+        username: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      if (result.isSignedIn) {
+        // Navigate to home screen
+        if(mounted)
+        {
+          context.go('/home');
+        }
+      } else {
+        setState(() {
+          _errorMessage = 'Sign in failed';
+        });
+      }
+    } on AuthException catch (e) {
+      setState(() {
+        _errorMessage = e.message;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +95,8 @@ class _SignInPage1State extends State<SignInPage1> {
                     ),
                     _gap(),
                     TextFormField(
+                      controller: _emailController,
                       validator: (value) {
-                        // add email validation
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
                         }
@@ -72,6 +119,7 @@ class _SignInPage1State extends State<SignInPage1> {
                     ),
                     _gap(),
                     TextFormField(
+                      controller: _passwordController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -114,28 +162,39 @@ class _SignInPage1State extends State<SignInPage1> {
                       contentPadding: const EdgeInsets.all(0),
                     ),
                     _gap(),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4)),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                    if (_isLoading)
+                      const CircularProgressIndicator()
+                    else
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4)),
                           ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              'Sign in',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              _signIn();
+                            }
+                          },
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            /// do something
-                          }
-                        },
                       ),
-                    ),
+                    if (_errorMessage != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: Text(
+                          _errorMessage!,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
                   ],
                 ),
               ),

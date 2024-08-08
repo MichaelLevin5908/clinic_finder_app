@@ -14,4 +14,5 @@ class Clinic {
     required this.operatingHours,
     required this.services,
   });
+  
 }

@@ -22,6 +22,7 @@ dependencies:
   amplify_flutter: ^0.2.0
   amplify_auth_cognito: ^0.2.0
   amplify_storage_s3: ^0.2.0
+  go_router: ^14.2.3
 
 dev_dependencies:
   flutter_test:

@@ -38,15 +38,13 @@ class _SignInPage1State extends State<SignInPage1> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    _isSignUpMode
-                        ? "Please set your email and password for your new account"
-                        : "Welcome to Clinic Finder!",
+                        "Welcome to Clinic Finder!",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 8),
                   Text(
                     _isSignUpMode
-                        ? "Please set your email and password to create an account."
+                        ? "Please set your credentials to create an account."
                         : "Enter your email and password to continue.",
                     style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,

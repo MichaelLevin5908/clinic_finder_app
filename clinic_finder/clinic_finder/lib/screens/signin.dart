@@ -20,6 +20,8 @@ class SignInPage1 extends StatelessWidget {
                     'images/chospital.png',
                     width: 100,
                     height: 100,
+                    fit: BoxFit.contain,
+                    colorBlendMode: BlendMode.modulate
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -33,10 +35,9 @@ class SignInPage1 extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  // The Authenticator will handle the input fields and buttons
                   const SignInForm(),
                   const SizedBox(height: 16),
-                  const CreateAccountButton(), // Add the create account button
+                  const CreateAccountButton(),
                 ],
               ),
             ),

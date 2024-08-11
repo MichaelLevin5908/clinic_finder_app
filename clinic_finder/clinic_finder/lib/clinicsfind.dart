@@ -14,22 +14,41 @@ class ClinicApp extends StatelessWidget {
         routerConfig: router,
         builder: Authenticator.builder(),
         theme: ThemeData(
-          textTheme: GoogleFonts.latoTextTheme( 
-            Theme.of(context).textTheme,
+          primaryColor: const Color(0xFF82CFEA),
+          hintColor: Colors.black,
+          scaffoldBackgroundColor: Colors.white,
+          textTheme: GoogleFonts.latoTextTheme(
+            Theme.of(context).textTheme.apply(
+              bodyColor: Colors.black,
+              displayColor: Colors.black,
+            ),
           ),
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: constants.primaryColor,
-          ).copyWith(
-            secondary: Colors.tealAccent, 
-            surface: const Color(0xff82CFEA), 
-            onPrimary: Colors.white, 
-            onSecondary: Colors.black, 
+          inputDecorationTheme: const InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.black),
+            hintStyle: TextStyle(color: Colors.grey),
+          ),
+          appBarTheme: const AppBarTheme(
+            color: Color(0xFF82CFEA),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: const Color(0xFF82CFEA),
+              textStyle: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: const Color(0xFF82CFEA),
+            secondary: Colors.white,
+            surface: const Color(0xFF82CFEA),
           ),
         ),
       ),
     );
   }
 }
+
+
 
 
 

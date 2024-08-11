@@ -17,7 +17,7 @@ class SignInPage1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/chospital.png',
+                    'images/chospital.png',
                     width: 100,
                     height: 100,
                   ),
@@ -161,8 +161,6 @@ class CreateAccountButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        // Displaying the sign-up screen within the Authenticator flow
-        // This will be handled automatically by the Authenticator widget
       },
       child: const Text(
         "Don't have an account? Create one",

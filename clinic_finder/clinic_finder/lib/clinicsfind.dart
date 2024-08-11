@@ -4,9 +4,7 @@ import 'package:clinic_finder/common/utils/colors.dart' as constants;
 import 'package:flutter/material.dart';
 
 class ClinicApp extends StatelessWidget {
-  const ClinicApp({
-    super.key,
-  });
+  const ClinicApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,3 +23,5 @@ class ClinicApp extends StatelessWidget {
     );
   }
 }
+
+

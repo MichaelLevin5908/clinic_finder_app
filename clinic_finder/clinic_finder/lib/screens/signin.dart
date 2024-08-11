@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 
-class SignInPage1 extends StatelessWidget {
+class SignInPage1 extends StatefulWidget {
   const SignInPage1({super.key});
 
   @override
+  State<SignInPage1> createState() => _SignInPage1State();
+}
+
+class _SignInPage1State extends State<SignInPage1> {
+  bool _isSignUpMode = false;
+
+  void _toggleSignUpMode() {
+    setState(() {
+      _isSignUpMode = !_isSignUpMode;
+    });
+  }
+  
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -21,23 +34,30 @@ class SignInPage1 extends StatelessWidget {
                     width: 100,
                     height: 100,
                     fit: BoxFit.contain,
-                    colorBlendMode: BlendMode.modulate
+                    colorBlendMode: BlendMode.modulate,
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    "Welcome to Clinic Finder!",
+                    _isSignUpMode
+                        ? "Please set your email and password for your new account"
+                        : "Welcome to Clinic Finder!",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Enter your email and password to continue.",
+                    _isSignUpMode
+                        ? "Please set your email and password to create an account."
+                        : "Enter your email and password to continue.",
                     style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
                   const SignInForm(),
                   const SizedBox(height: 16),
-                  const CreateAccountButton(),
+                  CreateAccountButton(
+                    isSignUpMode: _isSignUpMode,
+                    toggleSignUpMode: _toggleSignUpMode,
+                  ),
                 ],
               ),
             ),
@@ -141,7 +161,6 @@ class SignInButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          // Sign in logic can go here if needed
         },
         child: const Padding(
           padding: EdgeInsets.all(10.0),
@@ -156,20 +175,27 @@ class SignInButton extends StatelessWidget {
 }
 
 class CreateAccountButton extends StatelessWidget {
-  const CreateAccountButton({super.key});
+  final bool isSignUpMode;
+  final VoidCallback toggleSignUpMode;
+
+  const CreateAccountButton({
+    super.key,
+    required this.isSignUpMode,
+    required this.toggleSignUpMode,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-      },
-      child: const Text(
-        "Don't have an account? Create one",
-        style: TextStyle(fontSize: 16),
+      onPressed: toggleSignUpMode,
+      child: Text(
+        isSignUpMode ? "Already have an account? Sign in" : "Don't have an account? Create one",
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }
 }
+
 
 
 

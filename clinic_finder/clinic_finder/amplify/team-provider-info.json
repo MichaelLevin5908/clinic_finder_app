@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "phone8e4af184": {}
+      },
+      "api": {
+        "phone": {}
       }
     }
   }

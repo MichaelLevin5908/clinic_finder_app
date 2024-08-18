@@ -24,6 +24,7 @@ Future<void> main() async {
 Future<void> _configureAmplify() async {
   await Amplify.addPlugins([
     AmplifyAuthCognito(),
+    AmplifyAPI(modelProvider: ModelProvider.instance),
   ]);
   await Amplify.configure(amplifyconfig);
 }

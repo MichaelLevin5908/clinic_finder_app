@@ -37,6 +37,7 @@ dependencies:
   amplify_api: ^1.0.0
   amplify_auth_cognito: ^1.0.0
   amplify_flutter: ^1.0.0
+  amplify_datastore: ^1.8.0
 
   flutter:
     sdk: flutter

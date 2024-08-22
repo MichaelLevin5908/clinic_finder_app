@@ -2,7 +2,8 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_finder/common/utils/colors.dart' as constants;
 import 'package:go_router/go_router.dart';
-import 'package:clinic_finder/common/navigation/router/routes.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:clinic_finder/common/navigation/router/routes.dart';  
 
 class ClinicsListPage extends StatefulWidget {
   const ClinicsListPage({super.key});
@@ -32,26 +33,44 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Clinics Screen'),
-        backgroundColor: const Color(constants.primaryColorDark),
+        title: Text(
+          'Clinics Screen',
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.lightBlue[700],
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.logout, color: Colors.white),
           onPressed: _signOut,
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.arrow_forward),
+            icon: const Icon(Icons.map, color: Colors.white),
             onPressed: _Map, 
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: const Color(constants.primaryColorDark),
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.lightBlue[700],
+        child: const Icon(Icons.add, color: Colors.white),
       ),
-      body: const Center(
-        child: Text('Clinics List'),
+      body: Center(
+        child: Text(
+          'Clinics List',
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              color: Colors.lightBlue,
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
       ),
     );
   }

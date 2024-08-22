@@ -13,12 +13,18 @@ class ClinicsListPage extends StatefulWidget {
 
 class ClinicsListPageState extends State<ClinicsListPage> {
   Future<void> _signOut() async {
-    await Amplify.Auth.signOut(); 
-    if (!mounted) 
-    {
+    await Amplify.Auth.signOut();
+    if (!mounted) {
       return;
     }
     context.goNamed(AppRoute.signin.name);
+  }
+
+  Future<void> _Map() async {
+    if (!mounted) {
+      return;
+    }
+    context.goNamed(AppRoute.map.name);
   }
 
   @override
@@ -32,6 +38,12 @@ class ClinicsListPageState extends State<ClinicsListPage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: _signOut,
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.arrow_forward),
+            onPressed: _Map, 
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -44,4 +56,5 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     );
   }
 }
+
 

@@ -28,16 +28,17 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 cupertino_icons: ^1.0.6
-amplify_api: ^1.0.0
-amplify_auth_cognito: ^1.0.0
-amplify_authenticator: ^1.0.0
-amplify_flutter: ^1.0.0
 amplify_storage_s3: ^1.0.0
 flutter_lints: ^3.0.0
 cached_network_image: ^3.2.3
 
 dependencies:
-  amplify_authenticator: ^1.5.5
+  amplify_authenticator: ^1.0.0
+  amplify_api: ^1.0.0
+  amplify_auth_cognito: ^1.0.0
+  amplify_flutter: ^1.0.0
+  amplify_datastore: ^1.8.0
+
   flutter:
     sdk: flutter
 

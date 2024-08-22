@@ -18,7 +18,7 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     {
       return;
     }
-    context.goNamed(AppRoute.home.name);
+    context.goNamed(AppRoute.signin.name);
   }
 
   @override

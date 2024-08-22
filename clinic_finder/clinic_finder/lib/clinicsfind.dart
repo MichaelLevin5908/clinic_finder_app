@@ -2,11 +2,10 @@ import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:clinic_finder/common/navigation/router/router.dart';
 import 'package:clinic_finder/common/utils/colors.dart' as constants;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ClinicApp extends StatelessWidget {
-  const ClinicApp({
-    super.key,
-  });
+  const ClinicApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +14,33 @@ class ClinicApp extends StatelessWidget {
         routerConfig: router,
         builder: Authenticator.builder(),
         theme: ThemeData(
-          colorScheme:
-              ColorScheme.fromSwatch(primarySwatch: constants.primaryColor)
-                  .copyWith(
-            surface: const Color(0xff82CFEA),
+          primaryColor: const Color(0xFF82CFEA),
+          hintColor: Colors.black,
+          scaffoldBackgroundColor: Colors.white,
+          textTheme: GoogleFonts.latoTextTheme(
+            Theme.of(context).textTheme.apply(
+              bodyColor: Colors.black,
+              displayColor: Colors.black,
+            ),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.black),
+            hintStyle: TextStyle(color: Colors.grey),
+          ),
+          appBarTheme: const AppBarTheme(
+            color: Color(0xFF82CFEA),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: const Color(0xFF82CFEA),
+              textStyle: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: const Color(0xFF82CFEA),
+            secondary: Colors.white,
+            surface: const Color(0xFF82CFEA),
           ),
         ),
       ),

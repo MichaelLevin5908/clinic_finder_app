@@ -10,6 +10,7 @@ node_modules
 .history
 .svn/
 migrate_working_dir/
+*.json
 
 # IntelliJ related
 *.iml
@@ -64,3 +65,9 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+clinic_finder/ios/Flutter/Generated.xcconfig
+clinic_finder/ios/Runner/GeneratedPluginRegistrant.h
+clinic_finder/ios/Runner/GeneratedPluginRegistrant.m
+clinic_finder/macos/Flutter/ephemeral/flutter_export_environment.sh
+clinic_finder/ios/Flutter/flutter_export_environment.sh
+clinic_finder/macos/Flutter/ephemeral/Flutter-Generated.xcconfig

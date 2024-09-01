@@ -1,9 +1,11 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_finder/common/utils/colors.dart' as constants;
+import 'package:flutter_map/flutter_map.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:clinic_finder/common/navigation/router/routes.dart';  
+import 'package:clinic_finder/common/navigation/router/routes.dart';
+import 'package:latlong2/latlong.dart';  
 
 class ClinicsListPage extends StatefulWidget {
   const ClinicsListPage({super.key});
@@ -75,5 +77,24 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     );
   }
 }
+
+Widget content() {
+  return FlutterMap(
+    options: const MapOptions(
+      initialCenter: LatLng(34.0522, -118.2437),
+      initialZoom: 11,
+      interactionOptions: InteractionOptions(flags: ~InteractiveFlag.doubleTapZoom),
+    ),
+    children: [
+      openStreetMapTileLayer,
+      //MarkerLayer(markers: markers)
+    ],
+  );
+}
+
+TileLayer get openStreetMapTileLayer => TileLayer(
+  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+);
 
 

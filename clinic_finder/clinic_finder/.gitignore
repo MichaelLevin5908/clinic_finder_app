@@ -79,3 +79,6 @@ env/
 build/
 dist/
 *.egg-info/
+
+
+.env

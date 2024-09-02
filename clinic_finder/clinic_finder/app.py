@@ -1,7 +1,12 @@
 import requests
 import json
 
-api_key = "N_y0FizTVA6-is7j4ZLxks03oIMvqhS1Vh5KRsjFcouI73kpoRi6fgPF6Q71Le1vHJbLoTHNU9UMnpu_YpZq5-SdHMtKbjvLn3Nae6Jxr8SfbSKebq1DGWNYjRfWZnYx"
+from dotenv import load_dotenv
+import os
+
+load_dotenv() 
+
+api_key = os.getenv("API_KEY")
 url = "https://api.yelp.com/v3/businesses/search"
 
 headers = {

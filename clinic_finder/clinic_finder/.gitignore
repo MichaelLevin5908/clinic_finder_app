@@ -65,7 +65,7 @@ amplifytools.xcconfig
 #amplify-do-not-edit-end
 
 # Ignore the virtual environment directory
-venv/
+.venv/
 
 # Ignore Python cache files
 __pycache__/

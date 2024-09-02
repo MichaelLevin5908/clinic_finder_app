@@ -63,3 +63,19 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+# Ignore the virtual environment directory
+venv/
+
+# Ignore Python cache files
+__pycache__/
+
+# Ignore other common directories or files
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+build/
+dist/
+*.egg-info/

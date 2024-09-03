@@ -52,7 +52,7 @@ class ClinicsListPageState extends State<ClinicsListPage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.map, color: Colors.white),
+            icon: const Icon(Icons.info, color: Colors.white),
             onPressed: _Map, 
           ),
         ],

@@ -23,7 +23,7 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     context.goNamed(AppRoute.signin.name);
   }
 
-  Future<void> _Map() async {
+  Future<void> _map() async {
     if (!mounted) {
       return;
     }
@@ -53,7 +53,7 @@ class ClinicsListPageState extends State<ClinicsListPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.info, color: Colors.white),
-            onPressed: _Map, 
+            onPressed: _map, 
           ),
         ],
       ),

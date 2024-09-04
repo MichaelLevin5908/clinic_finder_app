@@ -70,7 +70,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Clinic Name: ABC Clinic',
+              'Clinic Name: ',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.lightBlue,
@@ -81,7 +81,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Phone Number: (123) 456-7890',
+              'Phone Number: ',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.black87,
@@ -91,7 +91,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Address: 123 Main St, Anytown, USA',
+              'Address: ',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.black87,
@@ -101,7 +101,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Hours: Open Now',
+              'Hours: ',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.green,

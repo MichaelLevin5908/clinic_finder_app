@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:clinic_finder/common/navigation/router/routes.dart';
 import 'package:latlong2/latlong.dart';  
+import 'package:geolocator/geolocator.dart';
 
 class ClinicsListPage extends StatefulWidget {
   const ClinicsListPage({super.key});
@@ -15,6 +16,8 @@ class ClinicsListPage extends StatefulWidget {
 }
 
 class ClinicsListPageState extends State<ClinicsListPage> {
+  LatLng? _userLocation;
+
   Future<void> _signOut() async {
     await Amplify.Auth.signOut();
     if (!mounted) {
@@ -30,6 +33,38 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     context.goNamed(AppRoute.map.name);
   }
 
+  Future<void> _getUserLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled, request user to enable it.
+      return Future.error('Location services are disabled.');
+    }
+
+    // Check if permission is granted.
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try to request permissions again.
+        return Future.error('Location permissions are denied');
+      }
+    
+  if (permission == LocationPermission.deniedForever) {
+      
+      return Future.error('Location permissions are permanently denied.');
+  }
+
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    setState(() {
+      _userLocation = LatLng(position.latitude, position.longitude);
+    });
+  }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -37,26 +37,22 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Check if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled, request user to enable it.
       return Future.error('Location services are disabled.');
     }
 
-    // Check if permission is granted.
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try to request permissions again.
         return Future.error('Location permissions are denied');
       }
+    }
     
-  if (permission == LocationPermission.deniedForever) {
-      
+    if (permission == LocationPermission.deniedForever) {
       return Future.error('Location permissions are permanently denied.');
-  }
+    }
 
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
@@ -64,7 +60,13 @@ class ClinicsListPageState extends State<ClinicsListPage> {
       _userLocation = LatLng(position.latitude, position.longitude);
     });
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserLocation();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,39 +99,27 @@ class ClinicsListPageState extends State<ClinicsListPage> {
         backgroundColor: Colors.lightBlue[700],
         child: const Icon(Icons.add, color: Colors.white),
       ),
-      body: Center(
-        child: Text(
-          'Clinics List',
-          style: GoogleFonts.lato(
-            textStyle: const TextStyle(
-              color: Colors.lightBlue,
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
+      body: _userLocation == null
+          ? const Center(child: CircularProgressIndicator())
+          : Center(
+              child: FlutterMap(
+                options: MapOptions(
+                  initialCenter: _userLocation!,
+                  initialZoom: 11,
+                ),
+                children: [
+                  openStreetMapTileLayer,
+                  //MarkerLayer(markers: markers) // Add markers if needed.
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
 
-Widget content() {
-  return FlutterMap(
-    options: const MapOptions(
-      initialCenter: LatLng(34.0522, -118.2437),
-      initialZoom: 11,
-      interactionOptions: InteractionOptions(flags: ~InteractiveFlag.doubleTapZoom),
-    ),
-    children: [
-      openStreetMapTileLayer,
-      //MarkerLayer(markers: markers)
-    ],
-  );
-}
-
 TileLayer get openStreetMapTileLayer => TileLayer(
   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-  userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+  userAgentPackageName: 'com.yourcompany.clinic_finder',
 );
 
 

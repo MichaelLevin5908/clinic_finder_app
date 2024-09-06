@@ -43,6 +43,7 @@ dependencies:
   geolocator: ^9.0.2
   flutter:
     sdk: flutter
+  path_provider: ^2.0.11
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +56,7 @@ dependencies:
   path: ^1.8.3
   riverpod_annotation: ^2.0.1
   uuid: ^4.4.2
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   amplify_lints: ^3.0.0
@@ -84,6 +86,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/chospital.png
+    - .env
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_finder/common/utils/colors.dart' as constants;
@@ -5,7 +6,10 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:clinic_finder/common/navigation/router/routes.dart';
-import 'package:latlong2/latlong.dart';  
+import 'package:latlong2/latlong.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'yelp_service.dart';
 
 
 class ClinicsMapPage extends StatefulWidget {
@@ -16,6 +20,35 @@ class ClinicsMapPage extends StatefulWidget {
 }
 
 class ClinicsMapState extends State<ClinicsMapPage> {
+
+  String clinicName =   '';
+  String phoneNumber =  '';
+  String address =      '';
+  String hours =        '';
+
+  @override
+  void initState() {
+    print("Hello");
+    super.initState();
+    _loadClinicData();
+  }
+
+  Future<void> _loadClinicData() async {
+    const location = 'Los Angeles, CA';
+    var hospitalNames = [];
+    try {
+      final hospitalNamesList = await fetchHospitalNames(location);
+      print('API Response: $hospitalNamesList');
+      hospitalNames = hospitalNamesList;
+    } catch (e) {
+      print('Error: $e');
+    }
+
+    // Retrieves the first clinic in the json file
+    setState(() {
+      clinicName = hospitalNames[0];
+    });
+  }
 
   Future<void> _signOut() async {
     await Amplify.Auth.signOut();
@@ -70,7 +103,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Clinic Name: ',
+              'Clinic Name: $clinicName',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.lightBlue,
@@ -81,7 +114,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Phone Number: ',
+              'Phone Number: $phoneNumber',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.black87,
@@ -91,7 +124,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Address: ',
+              'Address: $address',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.black87,
@@ -101,7 +134,7 @@ class ClinicsMapState extends State<ClinicsMapPage> {
             ),
             const SizedBox(height: 8.0),
             Text(
-              'Hours: ',
+              'Hours: $hours',
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.green,

@@ -2,12 +2,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-Future<List<String>> fetchHospitalNames(String location) async {
-  print("That is it");
+String getCurrentDay() {
+  final now = DateTime.now();
+  final days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  return days[now.weekday - 1];
+}
+
+Future<List<List<String>>> fetchHospitalData(String location) async {
   await dotenv.load(fileName: ".env");
 
   final apiKey = dotenv.env['API_KEY'];
-  print(apiKey);
   const url = "api.yelp.com";
   const path = "/v3/businesses/search";
 
@@ -29,13 +33,25 @@ Future<List<String>> fetchHospitalNames(String location) async {
 
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body);
-    final List<String> hospitalNames = [];
+    final List<List<String>> hospitalData = [];
+    final currentDay = getCurrentDay();
 
     for (var business in data['businesses']) {
-      hospitalNames.add(business['name']);
+      var name = business['name'];
+      var address = business['location']['address1'];
+      var phone = business['phone'];
+      var hours = business['hours']?.firstWhere((hour) => hour['day'] == currentDay,
+      orElse: () => null,)?['hours'];
+
+      name ??=    "Error";
+      address ??= "Error";
+      phone ??=   "Error";
+      hours ??=   "Error";
+      
+      hospitalData.add([name, address, phone, hours]);
     }
 
-    return hospitalNames;
+    return hospitalData;
   } else {
     throw Exception("Failed to retrieve data. Status code: ${response.statusCode}");
   }

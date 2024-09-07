@@ -28,25 +28,35 @@ class ClinicsMapState extends State<ClinicsMapPage> {
 
   @override
   void initState() {
-    print("Hello");
     super.initState();
     _loadClinicData();
   }
 
   Future<void> _loadClinicData() async {
     const location = 'Los Angeles, CA';
-    var hospitalNames = [];
+    var hospitalData = [];
     try {
-      final hospitalNamesList = await fetchHospitalNames(location);
-      print('API Response: $hospitalNamesList');
-      hospitalNames = hospitalNamesList;
+      final hospitalList = await fetchHospitalData(location);
+      print('API Response: $hospitalList');
+      hospitalData = hospitalList;
     } catch (e) {
       print('Error: $e');
     }
 
     // Retrieves the first clinic in the json file
     setState(() {
-      clinicName = hospitalNames[0];
+      if(hospitalData.isNotEmpty){
+        // 0 is name, 1 is address, 2 is phone number, 3 is hours
+        clinicName =   hospitalData[0][0];
+        address =      hospitalData[0][1];
+        phoneNumber =  hospitalData[0][2];
+        hours =        hospitalData[0][3];
+      } else {
+        clinicName =  "Error";
+        address =     "Error";
+        phoneNumber = "Error";
+        hours =       "Error";
+      }
     });
   }
 

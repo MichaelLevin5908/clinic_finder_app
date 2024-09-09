@@ -11,6 +11,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'yelp_service.dart';
+import 'package:clinic_finder/globals.dart';
 
 class ClinicsMapPage extends StatefulWidget {
   const ClinicsMapPage({super.key});
@@ -20,11 +21,6 @@ class ClinicsMapPage extends StatefulWidget {
 }
 
 class ClinicsMapState extends State<ClinicsMapPage> {
-
-  String clinicName =   '';
-  String phoneNumber =  '';
-  String address =      '';
-  String hours =        '';
 
   @override
   void initState() {

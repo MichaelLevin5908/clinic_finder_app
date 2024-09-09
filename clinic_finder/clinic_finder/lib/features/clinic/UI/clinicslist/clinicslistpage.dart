@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:clinic_finder/common/navigation/router/routes.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:clinic_finder/globals.dart';
 
 class ClinicsListPage extends StatefulWidget {
   const ClinicsListPage({super.key});
@@ -109,7 +110,6 @@ class ClinicsListPageState extends State<ClinicsListPage> {
   _addMarkers(hospitalData); // Add markers after loading data
 }
 
-
 Future<void> _addMarkers(List<dynamic> hospitalData) async {
   if (_userLocation != null) {
     List<Marker> markers = [];  // Create a list to hold the markers
@@ -142,7 +142,8 @@ Future<void> _addMarkers(List<dynamic> hospitalData) async {
           point: LatLng(latitude, longitude),
           child: GestureDetector(
             onTap: () {
-              print('Marker tapped for: ${hospital[0]}');
+              
+
               _map();  // Navigate to the map screen
             },
             child: const Icon(
@@ -228,6 +229,3 @@ TileLayer get openStreetMapTileLayer => TileLayer(
       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       userAgentPackageName: 'com.yourcompany.clinic_finder',
     );
-
-
-

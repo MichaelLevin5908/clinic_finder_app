@@ -112,9 +112,11 @@ class ClinicsListPageState extends State<ClinicsListPage> {
 
 Future<void> _addMarkers(List<dynamic> hospitalData) async {
   if (_userLocation != null) {
-    List<Marker> markers = [];  // Create a list to hold the markers
+    List<Marker> markers = [];
 
-    for (var hospital in hospitalData) {
+    for (int i = 0; i < hospitalData.length; i++) {
+      var hospital = hospitalData[i];
+
       // Log the hospital data to see its structure
       print('Hospital data: $hospital');
 
@@ -129,9 +131,8 @@ Future<void> _addMarkers(List<dynamic> hospitalData) async {
       final longitude = double.tryParse(hospital[5].toString()) ?? 0.0;
 
       if (latitude == 0.0 && longitude == 0.0) {
-        // Log the error instead of throwing an exception, so the loop continues
         print('Invalid coordinates for hospital: $hospital');
-        continue;  // Skip to the next hospital if coordinates are invalid
+        continue;
       }
 
       // Add the marker to the list
@@ -142,9 +143,14 @@ Future<void> _addMarkers(List<dynamic> hospitalData) async {
           point: LatLng(latitude, longitude),
           child: GestureDetector(
             onTap: () {
-              
+              // Map the index to global variables when a marker is tapped
+              gclinicName = hospitalData[i][0];  // Name
+              gaddress = hospitalData[i][1];     // Address
+              gphoneNumber = hospitalData[i][2]; // Phone number
+              ghours = hospitalData[i][3];       // Hours
 
-              _map();  // Navigate to the map screen
+              // Navigate to the map screen
+              _map();
             },
             child: const Icon(
               Icons.location_pin,
@@ -163,8 +169,6 @@ Future<void> _addMarkers(List<dynamic> hospitalData) async {
   }
 }
 
-
- 
   @override
   void initState() {
     super.initState();

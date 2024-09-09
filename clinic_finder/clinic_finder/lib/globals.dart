@@ -1,7 +1,7 @@
 library globals;
 
 // Current clinic
-String clinicName = '';
-String address = '';
-String phoneNumber = '';
-String hours = '';
+String gclinicName = '';
+String gaddress = '';
+String gphoneNumber = '';
+String ghours = '';

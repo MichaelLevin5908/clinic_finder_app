@@ -42,13 +42,17 @@ Future<List<List<String>>> fetchHospitalData(String location) async {
       var phone = business['phone'];
       var hours = business['hours']?.firstWhere((hour) => hour['day'] == currentDay,
       orElse: () => null,)?['hours'];
+      var latitude = business['coordinates']['latitude'].toString();
+      var longitude = business['coordinates']['longitude'].toString();
 
-      name ??=    "Error";
-      address ??= "Error";
-      phone ??=   "Error";
-      hours ??=   "Error";
+      name ??=      "Error";
+      address ??=   "Error";
+      phone ??=     "Error";
+      hours ??=     "Error";
+      latitude ??=  "Error";
+      longitude ??= "Error";
       
-      hospitalData.add([name, address, phone, hours]);
+      hospitalData.add([name, address, phone, hours, latitude, longitude]);
     }
 
     return hospitalData;

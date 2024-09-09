@@ -49,8 +49,6 @@ Future<List<List<String>>> fetchHospitalData(String location) async {
       address ??=   "Error";
       phone ??=     "Error";
       hours ??=     "Error";
-      latitude ??=  "Error";
-      longitude ??= "Error";
       
       hospitalData.add([name, address, phone, hours, latitude, longitude]);
     }

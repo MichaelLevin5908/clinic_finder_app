@@ -71,56 +71,79 @@ class ClinicsListPageState extends State<ClinicsListPage> {
     });
   }
 
-  Future<void> _loadClinicData() async {
-    final location = _userLocation != null ? _userLocation.toString() : '';
-    var hospitalData = [];
-    try {
-      final hospitalList = await fetchHospitalData(location);
-      print('API Response: $hospitalList');
-      hospitalData = hospitalList;
-    } catch (e) {
-      print('Error: $e');
-    }
-
-    // Retrieves the clinic
-    setState(() {
-      if (hospitalData.isNotEmpty) {
-        // 0 is name, 1 is address, 2 is phone number, 3 is hours
-        clinicName = hospitalData[0][0];
-        address = hospitalData[0][1];
-        phoneNumber = hospitalData[0][2];
-        hours = hospitalData[0][3];
-        latitude = hospitalData[0][4];
-        longitude = hospitalData[0][5];
-      } else {
-        clinicName = "Error";
-        address = "Error";
-        phoneNumber = "Error";
-        hours = "Error";
-      }
-    });
-
-    _addMarkers(hospitalData); // Call to add markers after loading data
+ Future<void> _loadClinicData() async {
+  if (_userLocation == null) {
+    print('User location is not available');
+    return;
   }
+
+  double userLatitude = _userLocation!.latitude;
+  double userLongitude = _userLocation!.longitude;
+
+  var hospitalData = [];
+  try {
+    final hospitalList = await fetchHospitalData(userLatitude, userLongitude);
+    print('API Response: $hospitalList');
+    hospitalData = hospitalList;
+  } catch (e) {
+    print('Error: $e');
+  }
+
+  // Updates the state with clinic data
+  setState(() {
+    if (hospitalData.isNotEmpty) {
+      clinicName = hospitalData[0][0];
+      address = hospitalData[0][1];
+      phoneNumber = hospitalData[0][2];
+      hours = hospitalData[0][3];
+      latitude = hospitalData[0][4]; // Now this is a string from Yelp API
+      longitude = hospitalData[0][5]; // This is a string from Yelp API
+    } else {
+      clinicName = "Error";
+      address = "Error";
+      phoneNumber = "Error";
+      hours = "Error";
+    }
+  });
+
+  _addMarkers(hospitalData); // Add markers after loading data
+}
+
 
 Future<void> _addMarkers(List<dynamic> hospitalData) async {
   if (_userLocation != null) {
-    setState(() {
-      _markers = hospitalData.map((hospital) {
-        final latitude = double.tryParse(hospital[4].toString()) ?? 0.0;
-        final longitude = double.tryParse(hospital[5].toString()) ?? 0.0;
+    List<Marker> markers = [];  // Create a list to hold the markers
 
-        if (latitude == 0.0 && longitude == 0.0) {
-          throw Exception('Invalid coordinates for hospital: $hospital');
-        }
+    for (var hospital in hospitalData) {
+      // Log the hospital data to see its structure
+      print('Hospital data: $hospital');
 
-        return Marker(
+      // Check if hospital has the expected structure (at least 6 elements)
+      if (hospital.length < 6) {
+        print('Invalid hospital data structure, skipping: $hospital');
+        continue;
+      }
+
+      // Safely try to parse latitude and longitude
+      final latitude = double.tryParse(hospital[4].toString()) ?? 0.0;
+      final longitude = double.tryParse(hospital[5].toString()) ?? 0.0;
+
+      if (latitude == 0.0 && longitude == 0.0) {
+        // Log the error instead of throwing an exception, so the loop continues
+        print('Invalid coordinates for hospital: $hospital');
+        continue;  // Skip to the next hospital if coordinates are invalid
+      }
+
+      // Add the marker to the list
+      markers.add(
+        Marker(
           width: 80.0,
           height: 80.0,
           point: LatLng(latitude, longitude),
           child: GestureDetector(
             onTap: () {
-              _map();
+              print('Marker tapped for: ${hospital[0]}');
+              _map();  // Navigate to the map screen
             },
             child: const Icon(
               Icons.location_pin,
@@ -128,11 +151,18 @@ Future<void> _addMarkers(List<dynamic> hospitalData) async {
               size: 40.0,
             ),
           ),
-        );
-      }).toList();
+        ),
+      );
+    }
+
+    // Update the state with the list of markers
+    setState(() {
+      _markers = markers;
     });
   }
 }
+
+
  
   @override
   void initState() {

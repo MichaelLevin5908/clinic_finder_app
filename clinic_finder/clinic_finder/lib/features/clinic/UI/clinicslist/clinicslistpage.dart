@@ -18,12 +18,14 @@ class ClinicsListPage extends StatefulWidget {
 
 class ClinicsListPageState extends State<ClinicsListPage> {
   LatLng? _userLocation;
-  List<Marker> _markers = []; // Initialize an empty markers list
+  List<Marker> _markers = [];
 
   String clinicName = '';
   String phoneNumber = '';
   String address = '';
   String hours = '';
+  String latitude = ''; 
+  String longitude = '';
 
   Future<void> _signOut() async {
     await Amplify.Auth.signOut();
@@ -80,7 +82,7 @@ class ClinicsListPageState extends State<ClinicsListPage> {
       print('Error: $e');
     }
 
-    // Retrieves the first clinic in the json file
+    // Retrieves the clinic
     setState(() {
       if (hospitalData.isNotEmpty) {
         // 0 is name, 1 is address, 2 is phone number, 3 is hours
@@ -88,6 +90,8 @@ class ClinicsListPageState extends State<ClinicsListPage> {
         address = hospitalData[0][1];
         phoneNumber = hospitalData[0][2];
         hours = hospitalData[0][3];
+        latitude = hospitalData[0][4];
+        longitude = hospitalData[0][5];
       } else {
         clinicName = "Error";
         address = "Error";
@@ -106,16 +110,20 @@ Future<void> _addMarkers(List<dynamic> hospitalData) async {
         final latitude = double.tryParse(hospital[4].toString()) ?? 0.0;
         final longitude = double.tryParse(hospital[5].toString()) ?? 0.0;
 
+        if (latitude == 0.0 && longitude == 0.0) {
+          throw Exception('Invalid coordinates for hospital: $hospital');
+        }
+
         return Marker(
           width: 80.0,
           height: 80.0,
           point: LatLng(latitude, longitude),
-          builder: (ctx) => GestureDetector(
+          child: GestureDetector(
             onTap: () {
-              _map(); // Define what happens on tap
+              _map();
             },
-            child: Icon(
-              Icons.location_pin, // Display a pin icon
+            child: const Icon(
+              Icons.location_pin,
               color: Colors.red,
               size: 40.0,
             ),
@@ -125,7 +133,7 @@ Future<void> _addMarkers(List<dynamic> hospitalData) async {
     });
   }
 }
-
+ 
   @override
   void initState() {
     super.initState();

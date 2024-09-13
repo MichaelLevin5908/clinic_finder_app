@@ -16,7 +16,7 @@ The Clinic Finder App is a Flutter-based mobile application designed to help use
 ### Prerequisites
 
 - **Flutter SDK**: Ensure that Flutter is installed on your machine. You can download it from [flutter.dev](https://flutter.dev).
-- **Google Maps API Key**: Obtain a Google Maps API key to enable map functionalities.
+- **Yelp API Key**: Obtain a Yelp API key to enable map functionalities.
 
 ### Installation
 

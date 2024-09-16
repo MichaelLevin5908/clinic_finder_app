@@ -1,6 +1,6 @@
 # Clinic Finder App
 
-##Video Demonstration
+## Video Demonstration
 https://youtu.be/170asvjLIKI
 
 ## Overview

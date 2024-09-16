@@ -1,5 +1,8 @@
 # Clinic Finder App
 
+##Video Demonstration
+https://youtu.be/170asvjLIKI
+
 ## Overview
 
 The Clinic Finder App is a Flutter-based mobile application designed to help users find radiology clinics based on location and specialty. It integrates Google Maps for displaying clinic locations and provides detailed information about each clinic, including contact information, services offered, and user reviews.

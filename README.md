@@ -1,5 +1,7 @@
 # Clinic Finder App
 
+![Clinic Finder App Logo](clinic.png)
+
 ## Video Demonstration
 https://youtu.be/170asvjLIKI
 
